@@ -4,21 +4,21 @@ import com.google.gson.annotations.SerializedName
 
 data class ItemResponse(
     @SerializedName("by")
-    val by: String,
+    val by: String?,
     @SerializedName("descendants")
-    val descendants: Int,
+    val descendants: Int?,
     @SerializedName("id")
     val id: Long,
     @SerializedName("kids")
-    val kids: List<Long>,
+    val kids: List<Long>?,
     @SerializedName("score")
-    val score: Int,
+    val score: Int?,
     @SerializedName("time")
-    val time: Long,
+    val time: Long?,
     @SerializedName("title")
-    val title: String,
+    val title: String?,
     @SerializedName("type")
-    val type: String,
+    val type: String?,
     @SerializedName("url")
-    val url: String
+    val url: String?
 )

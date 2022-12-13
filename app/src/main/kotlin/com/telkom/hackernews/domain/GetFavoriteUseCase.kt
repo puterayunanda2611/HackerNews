@@ -1,8 +1,9 @@
 package com.telkom.hackernews.domain
 
 import com.telkom.hackernews.data.HackerNewsRepository
+import javax.inject.Inject
 
-class GetFavoriteUseCase(
+class GetFavoriteUseCase @Inject constructor(
     private val repository: HackerNewsRepository
 ) : BaseUseCase<Unit, String> {
 

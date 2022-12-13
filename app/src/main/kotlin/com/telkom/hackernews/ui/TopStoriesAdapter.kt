@@ -23,11 +23,8 @@ class TopStoriesAdapter : RecyclerView.Adapter<ViewHolder>() {
         return items.size
     }
 
-    fun clearAllAndAdd(items: List<TopStoryModel>) {
-        this.items.apply {
-            clear()
-            addAll(items)
-        }
+    fun addItem(item: TopStoryModel) {
+        this.items.add(item)
         notifyDataSetChanged()
     }
 

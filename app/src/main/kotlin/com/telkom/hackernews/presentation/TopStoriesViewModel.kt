@@ -6,10 +6,11 @@ import com.telkom.hackernews.domain.GetFavoriteUseCase
 import com.telkom.hackernews.domain.GetTopStoriesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TopStoriesViewModel(
+class TopStoriesViewModel @Inject constructor(
     private val getTopStoriesUseCase: GetTopStoriesUseCase,
     private val getFavoriteUseCase: GetFavoriteUseCase
 ) : BaseViewModel() {
@@ -21,19 +22,24 @@ class TopStoriesViewModel(
     fun loadTopStories() {
         getTopStoriesUseCase
             .execute(Unit)
-            .toList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {  }
+            .doOnSubscribe {
+                _state.value = TopStoriesViewState.ShowLoading
+            }
             .subscribe({
                 _state.value = TopStoriesViewState.Success(it)
             }, {
                 _state.value = TopStoriesViewState.Error(it)
+            }, {
+                _state.value = TopStoriesViewState.HideLoading
             }).addToBag()
     }
 
     fun getFavorite() {
-        _state.value = getFavoriteUseCase.execute(Unit)
-            .let { TopStoriesViewState.GetMyFavorite(it) }
+        getFavoriteUseCase.execute(Unit)
+            .let {
+                _state.postValue(TopStoriesViewState.GetMyFavorite(it))
+            }
     }
 }

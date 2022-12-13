@@ -9,7 +9,6 @@
         android:id="@+id/tvTitle"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Judul : Lorem Ipsum" />
@@ -18,7 +17,6 @@
         android:id="@+id/tvCommentCount"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_marginTop="4dp"
-        android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Jumlah Komentar : 15" />
@@ -27,7 +25,6 @@
         android:id="@+id/tvScore"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_marginTop="4dp"
-        android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Score : 300" />

@@ -13,11 +13,11 @@ class GetTopStoriesTransformer @Inject constructor()
     override fun transform(input: ItemResponse): TopStoryModel {
         return TopStoryModel(
             id = input.id,
-            title = input.title,
-            date = getDateFormat(input.time),
-            by = input.by,
-            kids = input.kids,
-            score = input.score
+            title = input.title.orEmpty(),
+            date = getDateFormat(input.time ?:0L),
+            by = input.by.orEmpty(),
+            kids = input.kids.orEmpty(),
+            score = input.score ?:0
         )
     }
 
