@@ -5,5 +5,6 @@ data class HackerNewsModel(
     val title: String,
     val date: String,
     val by: String,
-    val kids: List<Long>
+    val kids: List<Long>,
+    val score: Int
 )

@@ -13,7 +13,8 @@ class GetTopStoriesTransformer
             title = input.title,
             date = getDateFormat(input.time),
             by = input.by,
-            kids = input.kids
+            kids = input.kids,
+            score = input.score
         )
     }
 
