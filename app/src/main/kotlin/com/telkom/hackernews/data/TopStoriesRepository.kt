@@ -1,6 +1,6 @@
 package com.telkom.hackernews.data
 
-import com.telkom.hackernews.data.HackerNewsPreferenceKeys.PREFERENCE_KEY_MY_FAVORITE_STORY
+import com.telkom.hackernews.data.TopStoriesPreferenceKeys.PREFERENCE_KEY_MY_FAVORITE_STORY
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -9,7 +9,7 @@ interface HackerNewsRepository {
 
     fun getTopStoriesId(): Single<List<Long>>
 
-    fun getDetailItem(storyId: Long): Single<HackerNewsDetailItemResponse>
+    fun getDetailItem(storyId: Long): Single<ItemResponse>
 
     fun getMyFavorite(): String
 
@@ -18,7 +18,7 @@ interface HackerNewsRepository {
 
 @Singleton
 class HackerNewsRepositoryImpl @Inject constructor(
-    private val service: HackerNewsService,
+    private val service: TopStoriesService,
     private val storage: HackerNewsPreference
 ) : HackerNewsRepository {
 
@@ -26,7 +26,7 @@ class HackerNewsRepositoryImpl @Inject constructor(
         return service.getTopStoriesId()
     }
 
-    override fun getDetailItem(storyId: Long): Single<HackerNewsDetailItemResponse> {
+    override fun getDetailItem(storyId: Long): Single<ItemResponse> {
         return service.getDetailItem(storyId)
     }
 

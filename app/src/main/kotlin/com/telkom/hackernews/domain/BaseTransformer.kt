@@ -1,5 +1,5 @@
 package com.telkom.hackernews.domain
 
-interface HackerNewsTransformer<I, O> {
+interface BaseTransformer<I, O> {
     fun transform(input: I): O
 }

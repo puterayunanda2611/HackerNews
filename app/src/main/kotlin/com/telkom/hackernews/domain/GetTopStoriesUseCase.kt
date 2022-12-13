@@ -8,9 +8,9 @@ import javax.inject.Singleton
 class GetTopStoriesUseCase(
     private val repository: HackerNewsRepository,
     private val transformer: GetTopStoriesTransformer
-) : HackerNewsUseCase<Unit, Observable<HackerNewsModel>> {
+) : BaseUseCase<Unit, Observable<TopStoryModel>> {
 
-    override fun execute(input: Unit): Observable<HackerNewsModel> {
+    override fun execute(input: Unit): Observable<TopStoryModel> {
         return repository.getTopStoriesId()
             .toObservable()
             .flatMapIterable { it }

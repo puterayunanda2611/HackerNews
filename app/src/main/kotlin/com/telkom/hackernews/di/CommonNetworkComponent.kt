@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.telkom.hackernews.data.HackerNewsService
+import com.telkom.hackernews.data.TopStoriesService
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -21,9 +21,9 @@ import javax.inject.Singleton
 )
 interface HackerNewsNetworkComponent: HackerNewsNetworkDeps {
     @Component.Builder
-    interface Builder : HackerNewsComponentBuilder<HackerNewsNetworkComponent>
+    interface Builder : BaseComponentBuilder<HackerNewsNetworkComponent>
 
-    object ComponentFactory : HackerNewsComponentFactory<Context, HackerNewsNetworkComponent>() {
+    object ComponentFactory : BaseComponentFactory<Context, HackerNewsNetworkComponent>() {
         override fun build(param: Context): HackerNewsNetworkComponent {
             return DaggerHackerNewsNetworkComponent.builder()
                 .context(param)
@@ -33,7 +33,7 @@ interface HackerNewsNetworkComponent: HackerNewsNetworkDeps {
 }
 
 interface HackerNewsNetworkDeps {
-    fun provideService(): HackerNewsService
+    fun provideService(): TopStoriesService
 }
 
 @Module
@@ -79,7 +79,7 @@ object HackerNewsNetworkModule {
     @Singleton
     @JvmStatic
     @Provides
-    fun provideService(retrofit: Retrofit): HackerNewsService {
-        return retrofit.create(HackerNewsService::class.java)
+    fun provideService(retrofit: Retrofit): TopStoriesService {
+        return retrofit.create(TopStoriesService::class.java)
     }
 }

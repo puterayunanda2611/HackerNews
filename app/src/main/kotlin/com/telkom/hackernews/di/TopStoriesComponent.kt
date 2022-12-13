@@ -2,7 +2,7 @@ package com.telkom.hackernews.di
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import com.telkom.hackernews.data.HackerNewsDetailItemResponse
+import com.telkom.hackernews.data.ItemResponse
 import com.telkom.hackernews.data.HackerNewsRepository
 import com.telkom.hackernews.data.HackerNewsRepositoryImpl
 import com.telkom.hackernews.domain.*
@@ -29,12 +29,12 @@ interface TopStoriesComponent {
     fun inject(activity: TopStoriesActivity)
 
     @Component.Builder
-    interface Builder : HackerNewsComponentBuilder<TopStoriesComponent> {
+    interface Builder : BaseComponentBuilder<TopStoriesComponent> {
         fun storage(deps: HackerNewsStorageDeps): Builder
         fun network(deps: HackerNewsNetworkDeps): Builder
     }
 
-    object ComponentProvider : HackerNewsComponentProvider<Activity, TopStoriesComponent> {
+    object ComponentProvider : BaseComponentProvider<Activity, TopStoriesComponent> {
         override fun provide(param: Activity): TopStoriesComponent {
             return DaggerTopStoriesComponent.builder()
                 .storage(HackerNewsStorageComponent.ComponentFactory.get(param))
@@ -53,11 +53,11 @@ abstract class TopStoriesModule {
 
     @Binds
     abstract fun bindTransformer(impl: GetTopStoriesTransformer):
-            HackerNewsTransformer<HackerNewsDetailItemResponse, HackerNewsModel>
+            BaseTransformer<ItemResponse, TopStoryModel>
 
     @Binds
     abstract fun bindUseCase(impl: GetTopStoriesUseCase):
-            HackerNewsUseCase<Unit, Observable<HackerNewsModel>>
+            BaseUseCase<Unit, Observable<TopStoryModel>>
 
     @Binds
     @IntoMap

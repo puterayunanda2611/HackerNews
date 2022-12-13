@@ -3,10 +3,10 @@ package com.telkom.hackernews.di
 import android.content.Context
 import dagger.BindsInstance
 
-interface HackerNewsComponentBuilder<out C> {
+interface BaseComponentBuilder<out C> {
 
     @BindsInstance
-    fun context(context: Context): HackerNewsComponentBuilder<C>
+    fun context(context: Context): BaseComponentBuilder<C>
 
     fun build(): C
 }

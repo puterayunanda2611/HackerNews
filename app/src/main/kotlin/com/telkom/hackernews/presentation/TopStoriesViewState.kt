@@ -1,10 +1,10 @@
 package com.telkom.hackernews.presentation
 
-import com.telkom.hackernews.domain.HackerNewsModel
+import com.telkom.hackernews.domain.TopStoryModel
 
 sealed class TopStoriesViewState {
     data class Success(
-        val items: List<HackerNewsModel>
+        val items: List<TopStoryModel>
     ): TopStoriesViewState()
 
     data class Error(val error: Throwable): TopStoriesViewState()

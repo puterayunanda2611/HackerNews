@@ -1,5 +1,5 @@
 package com.telkom.hackernews.di
 
-interface HackerNewsComponentProvider<in P, out C> {
+interface BaseComponentProvider<in P, out C> {
     fun provide(param: P): C
 }

@@ -2,7 +2,7 @@ package com.telkom.hackernews.data
 
 import com.google.gson.annotations.SerializedName
 
-data class HackerNewsDetailItemResponse(
+data class ItemResponse(
     @SerializedName("by")
     val by: String,
     @SerializedName("descendants")

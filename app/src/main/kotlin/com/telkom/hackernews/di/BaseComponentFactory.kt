@@ -2,7 +2,7 @@ package com.telkom.hackernews.di
 
 import androidx.annotation.GuardedBy
 
-abstract class HackerNewsComponentFactory<in P, out C> {
+abstract class BaseComponentFactory<in P, out C> {
     @Volatile
     @GuardedBy("lock")
     private var component: C? = null

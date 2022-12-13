@@ -1,7 +1,7 @@
 package com.telkom.hackernews.data
 
 import com.telkom.hackernews.data.*
-import com.telkom.hackernews.data.HackerNewsPreferenceKeys.PREFERENCE_KEY_MY_FAVORITE_STORY
+import com.telkom.hackernews.data.TopStoriesPreferenceKeys.PREFERENCE_KEY_MY_FAVORITE_STORY
 import io.reactivex.Single
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class HackerNewsRepositoryImplTest {
 
     @Mock
-    lateinit var service: HackerNewsService
+    lateinit var service: TopStoriesService
 
     @Mock
     lateinit var storage: HackerNewsPreference
@@ -45,7 +45,7 @@ class HackerNewsRepositoryImplTest {
     @Test
     fun `given HackerNewsService when call getDetailItem with specify story id then return one of item on top stories`() {
         val storyId = 33964285L
-        val response = HackerNewsDetailItemResponse(
+        val response = ItemResponse(
             by = "kungfudoi",
             descendants = 44,
             id = 33964285L,

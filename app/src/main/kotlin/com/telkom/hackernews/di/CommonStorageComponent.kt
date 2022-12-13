@@ -15,9 +15,9 @@ import javax.inject.Singleton
 interface HackerNewsStorageComponent : HackerNewsStorageDeps {
 
     @Component.Builder
-    interface Builder : HackerNewsComponentBuilder<HackerNewsStorageComponent>
+    interface Builder : BaseComponentBuilder<HackerNewsStorageComponent>
 
-    object ComponentFactory : HackerNewsComponentFactory<Context, HackerNewsStorageComponent>() {
+    object ComponentFactory : BaseComponentFactory<Context, HackerNewsStorageComponent>() {
         override fun build(param: Context): HackerNewsStorageComponent {
             return DaggerHackerNewsStorageComponent.builder()
                 .context(param)

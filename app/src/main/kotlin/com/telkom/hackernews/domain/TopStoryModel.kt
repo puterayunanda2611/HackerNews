@@ -1,6 +1,6 @@
 package com.telkom.hackernews.domain
 
-data class HackerNewsModel(
+data class TopStoryModel(
     val id: Long,
     val title: String,
     val date: String,
