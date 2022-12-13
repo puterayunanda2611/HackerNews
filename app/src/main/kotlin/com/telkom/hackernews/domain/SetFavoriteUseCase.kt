@@ -1,8 +1,11 @@
 package com.telkom.hackernews.domain
 
 import com.telkom.hackernews.data.HackerNewsRepository
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class SetFavoriteUseCase(
+@Singleton
+class SetFavoriteUseCase @Inject constructor(
     private val repository: HackerNewsRepository
 ) : HackerNewsUseCase<String, Unit> {
 

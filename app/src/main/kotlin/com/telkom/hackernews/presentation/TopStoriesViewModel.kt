@@ -6,15 +6,17 @@ import com.telkom.hackernews.domain.GetFavoriteUseCase
 import com.telkom.hackernews.domain.GetTopStoriesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Singleton
 
-class HackerNewsViewModel(
+@Singleton
+class TopStoriesViewModel(
     private val getTopStoriesUseCase: GetTopStoriesUseCase,
     private val getFavoriteUseCase: GetFavoriteUseCase
 ) : BaseViewModel() {
-    val state: LiveData<HackerNewsViewState>
+    val state: LiveData<TopStoriesViewState>
         get() = _state
 
-    private val _state: MutableLiveData<HackerNewsViewState> = MutableLiveData()
+    private val _state: MutableLiveData<TopStoriesViewState> = MutableLiveData()
 
     fun loadTopStories() {
         getTopStoriesUseCase
@@ -24,14 +26,14 @@ class HackerNewsViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {  }
             .subscribe({
-                _state.value = HackerNewsViewState.Success(it)
+                _state.value = TopStoriesViewState.Success(it)
             }, {
-                _state.value = HackerNewsViewState.Error(it)
+                _state.value = TopStoriesViewState.Error(it)
             }).addToBag()
     }
 
     fun getFavorite() {
         _state.value = getFavoriteUseCase.execute(Unit)
-            .let { HackerNewsViewState.GetMyFavorite(it) }
+            .let { TopStoriesViewState.GetMyFavorite(it) }
     }
 }

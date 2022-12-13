@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.telkom.hackernews.databinding.ItemCommentStoryBinding
-import com.telkom.hackernews.ui.TopStoriesDetailAdapter.ViewHolder
+import com.telkom.hackernews.ui.TopStoryDetailAdapter.ViewHolder
 
-class TopStoriesDetailAdapter : RecyclerView.Adapter<ViewHolder>() {
+class TopStoryDetailAdapter : RecyclerView.Adapter<ViewHolder>() {
     private var items: MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -2,6 +2,8 @@ package com.telkom.hackernews.data
 
 import com.telkom.hackernews.data.HackerNewsPreferenceKeys.PREFERENCE_KEY_MY_FAVORITE_STORY
 import io.reactivex.Single
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface HackerNewsRepository {
 
@@ -14,7 +16,8 @@ interface HackerNewsRepository {
     fun setMyFavorite(value: String)
 }
 
-class HackerNewsRepositoryImpl(
+@Singleton
+class HackerNewsRepositoryImpl @Inject constructor(
     private val service: HackerNewsService,
     private val storage: HackerNewsPreference
 ) : HackerNewsRepository {

@@ -2,7 +2,9 @@ package com.telkom.hackernews.domain
 
 import com.telkom.hackernews.data.HackerNewsRepository
 import io.reactivex.Observable
+import javax.inject.Singleton
 
+@Singleton
 class GetTopStoriesUseCase(
     private val repository: HackerNewsRepository,
     private val transformer: GetTopStoriesTransformer

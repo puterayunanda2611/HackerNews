@@ -3,8 +3,11 @@ package com.telkom.hackernews.domain
 import com.telkom.hackernews.data.HackerNewsDetailItemResponse
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GetTopStoriesTransformer
+@Singleton
+class GetTopStoriesTransformer @Inject constructor()
     : HackerNewsTransformer<HackerNewsDetailItemResponse, HackerNewsModel> {
 
     override fun transform(input: HackerNewsDetailItemResponse): HackerNewsModel {
