@@ -5,7 +5,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
-interface HackerNewsRepository {
+interface TopStoriesRepository {
 
     fun getTopStoriesId(): Single<List<Long>>
 
@@ -17,10 +17,10 @@ interface HackerNewsRepository {
 }
 
 @Singleton
-class HackerNewsRepositoryImpl @Inject constructor(
+class TopStoriesRepositoryImpl @Inject constructor(
     private val service: TopStoriesService,
-    private val storage: HackerNewsPreference
-) : HackerNewsRepository {
+    private val storage: TopStoriesPreference
+) : TopStoriesRepository {
 
     override fun getTopStoriesId(): Single<List<Long>> {
         return service.getTopStoriesId()

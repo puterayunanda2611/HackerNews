@@ -5,4 +5,6 @@
     <string name="main_page_content_title">Judul : %s</string>
     <string name="main_page_content_comment">Komentar : %s</string>
     <string name="main_page_content_score">Score : %s</string>
+    <string name="detail_page_username_label">By %s</string>
+    <string name="detail_page_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
 </resources>

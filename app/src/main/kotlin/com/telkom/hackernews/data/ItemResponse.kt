@@ -20,5 +20,9 @@ data class ItemResponse(
     @SerializedName("type")
     val type: String?,
     @SerializedName("url")
-    val url: String?
+    val url: String?,
+    @SerializedName("text")
+    val text: String?,
+    @SerializedName("parent")
+    val parent: String?
 )

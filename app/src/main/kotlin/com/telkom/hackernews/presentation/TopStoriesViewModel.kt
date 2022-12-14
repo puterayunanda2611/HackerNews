@@ -30,6 +30,7 @@ class TopStoriesViewModel @Inject constructor(
             .subscribe({
                 _state.value = TopStoriesViewState.Success(it)
             }, {
+                _state.value = TopStoriesViewState.HideLoading
                 _state.value = TopStoriesViewState.Error(it)
             }, {
                 _state.value = TopStoriesViewState.HideLoading
@@ -39,7 +40,7 @@ class TopStoriesViewModel @Inject constructor(
     fun getFavorite() {
         getFavoriteUseCase.execute(Unit)
             .let {
-                _state.postValue(TopStoriesViewState.GetMyFavorite(it))
+                _state.postValue(TopStoriesViewState.GetMyFavorite(it?.title.orEmpty()))
             }
     }
 }

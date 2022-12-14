@@ -19,13 +19,13 @@ class HackerNewsRepositoryImplTest {
     lateinit var service: TopStoriesService
 
     @Mock
-    lateinit var storage: HackerNewsPreference
+    lateinit var storage: TopStoriesPreference
 
-    private lateinit var repository: HackerNewsRepository
+    private lateinit var repository: TopStoriesRepository
 
     @Before
     fun `before each test`() {
-        repository = HackerNewsRepositoryImpl(service = service, storage = storage)
+        repository = TopStoriesRepositoryImpl(service = service, storage = storage)
     }
 
     @Test
@@ -54,7 +54,9 @@ class HackerNewsRepositoryImplTest {
             time = 1670901260,
             title = "UC Berkeley launches SkyPilot to help navigate soaring cloud costs",
             type = "story",
-            url = "https://www.datanami.com/2022/12/12/uc-berkeley-launches-skypilot-to-help-navigate-soaring-cloud-costs/"
+            url = "https://www.datanami.com/2022/12/12/uc-berkeley-launches-skypilot-to-help-navigate-soaring-cloud-costs/",
+            text = "text",
+            parent = ""
         )
 
         `when`(service.getDetailItem(storyId)).thenReturn(Single.just(response))

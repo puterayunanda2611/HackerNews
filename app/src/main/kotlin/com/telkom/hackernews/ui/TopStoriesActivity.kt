@@ -1,5 +1,6 @@
 package com.telkom.hackernews.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,6 +16,11 @@ import com.telkom.hackernews.di.ViewModelFactory
 import com.telkom.hackernews.domain.TopStoryModel
 import com.telkom.hackernews.presentation.TopStoriesViewModel
 import com.telkom.hackernews.presentation.TopStoriesViewState
+import com.telkom.hackernews.ui.TopStoryIntentKey.COMMENTS
+import com.telkom.hackernews.ui.TopStoryIntentKey.DATE
+import com.telkom.hackernews.ui.TopStoryIntentKey.ID
+import com.telkom.hackernews.ui.TopStoryIntentKey.TITLE
+import com.telkom.hackernews.ui.TopStoryIntentKey.USERNAME
 import javax.inject.Inject
 
 class TopStoriesActivity : AppCompatActivity() {
@@ -35,12 +41,17 @@ class TopStoriesActivity : AppCompatActivity() {
         setupView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFavorite()
+    }
+
     private fun observeData() {
         viewModel.state.observe(this) { viewState ->
             when (viewState) {
                 is TopStoriesViewState.Error -> showErrorToast()
                 is TopStoriesViewState.GetMyFavorite -> setTitle(viewState.title)
-                is TopStoriesViewState.Success -> setTopStories(viewState.items)
+                is TopStoriesViewState.Success -> setTopStories(viewState.item)
                 TopStoriesViewState.HideLoading -> hideLoading()
                 TopStoriesViewState.ShowLoading -> showLoading()
             }
@@ -48,7 +59,6 @@ class TopStoriesActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        viewModel.getFavorite()
         viewModel.loadTopStories()
     }
 
@@ -58,7 +68,7 @@ class TopStoriesActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(context, HORIZONTAL))
             addItemDecoration(DividerItemDecoration(context, VERTICAL))
             layoutManager = GridLayoutManager(this@TopStoriesActivity, SPAN_COUNT_GRID)
-            adapter = TopStoriesAdapter()
+            adapter = TopStoriesAdapter(::navigateToNextPage)
         }
     }
 
@@ -81,6 +91,16 @@ class TopStoriesActivity : AppCompatActivity() {
 
     private fun showLoading() {
         binding.progressBar.isVisible = true
+    }
+
+    private fun navigateToNextPage(model: TopStoryModel) {
+        Intent(this, TopStoryDetailActivity::class.java).apply {
+            putExtra(ID, model.id)
+            putExtra(TITLE, model.title)
+            putExtra(DATE, model.date)
+            putExtra(USERNAME, model.by)
+            putExtra(COMMENTS, model.kids.toLongArray())
+        }.let(::startActivity)
     }
 
     companion object {

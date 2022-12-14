@@ -18,27 +18,27 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [HackerNewsNetworkModule::class]
+    modules = [CommonNetworkModule::class]
 )
-interface HackerNewsNetworkComponent: HackerNewsNetworkDeps {
+interface CommonNetworkComponent: CommonNetworkDeps {
     @Component.Builder
-    interface Builder : BaseComponentBuilder<HackerNewsNetworkComponent>
+    interface Builder : BaseComponentBuilder<CommonNetworkComponent>
 
-    object ComponentFactory : BaseComponentFactory<Context, HackerNewsNetworkComponent>() {
-        override fun build(param: Context): HackerNewsNetworkComponent {
-            return DaggerHackerNewsNetworkComponent.builder()
+    object ComponentFactory : BaseComponentFactory<Context, CommonNetworkComponent>() {
+        override fun build(param: Context): CommonNetworkComponent {
+            return DaggerCommonNetworkComponent.builder()
                 .context(param)
                 .build()
         }
     }
 }
 
-interface HackerNewsNetworkDeps {
+interface CommonNetworkDeps {
     fun provideService(): TopStoriesService
 }
 
 @Module
-object HackerNewsNetworkModule {
+object CommonNetworkModule {
 
     @Singleton
     @JvmStatic

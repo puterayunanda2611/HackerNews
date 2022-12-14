@@ -3,8 +3,8 @@ package com.telkom.hackernews.di
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.telkom.hackernews.data.ItemResponse
-import com.telkom.hackernews.data.HackerNewsRepository
-import com.telkom.hackernews.data.HackerNewsRepositoryImpl
+import com.telkom.hackernews.data.TopStoriesRepository
+import com.telkom.hackernews.data.TopStoriesRepositoryImpl
 import com.telkom.hackernews.domain.*
 import com.telkom.hackernews.presentation.TopStoriesViewModel
 import com.telkom.hackernews.ui.TopStoriesActivity
@@ -21,8 +21,8 @@ import javax.inject.Singleton
         TopStoriesModule::class
     ],
     dependencies = [
-        HackerNewsStorageDeps::class,
-        HackerNewsNetworkDeps::class
+        CommonStorageDeps::class,
+        CommonNetworkDeps::class
     ]
 )
 interface TopStoriesComponent {
@@ -30,15 +30,15 @@ interface TopStoriesComponent {
 
     @Component.Builder
     interface Builder : BaseComponentBuilder<TopStoriesComponent> {
-        fun storage(deps: HackerNewsStorageDeps): Builder
-        fun network(deps: HackerNewsNetworkDeps): Builder
+        fun storage(deps: CommonStorageDeps): Builder
+        fun network(deps: CommonNetworkDeps): Builder
     }
 
     object ComponentProvider : BaseComponentProvider<Activity, TopStoriesComponent> {
         override fun provide(param: Activity): TopStoriesComponent {
             return DaggerTopStoriesComponent.builder()
-                .storage(HackerNewsStorageComponent.ComponentFactory.get(param))
-                .network(HackerNewsNetworkComponent.ComponentFactory.get(param))
+                .storage(CommonStorageComponent.ComponentFactory.get(param))
+                .network(CommonNetworkComponent.ComponentFactory.get(param))
                 .context(param)
                 .build()
         }
@@ -49,7 +49,7 @@ interface TopStoriesComponent {
 abstract class TopStoriesModule {
 
     @Binds
-    abstract fun bindRepository(impl: HackerNewsRepositoryImpl): HackerNewsRepository
+    abstract fun bindRepository(impl: TopStoriesRepositoryImpl): TopStoriesRepository
 
     @Binds
     abstract fun bindTransformer(impl: GetTopStoriesTransformer):

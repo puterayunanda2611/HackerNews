@@ -1,8 +1,8 @@
 package com.telkom.hackernews.di
 
 import android.content.Context
-import com.telkom.hackernews.data.HackerNewsPreference
-import com.telkom.hackernews.data.HackerNewsPreferenceImpl
+import com.telkom.hackernews.data.TopStoriesPreference
+import com.telkom.hackernews.data.TopStoriesPreferenceImpl
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -10,33 +10,33 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [HackerNewsStorageModule::class]
+    modules = [CommonStorageModule::class]
 )
-interface HackerNewsStorageComponent : HackerNewsStorageDeps {
+interface CommonStorageComponent : CommonStorageDeps {
 
     @Component.Builder
-    interface Builder : BaseComponentBuilder<HackerNewsStorageComponent>
+    interface Builder : BaseComponentBuilder<CommonStorageComponent>
 
-    object ComponentFactory : BaseComponentFactory<Context, HackerNewsStorageComponent>() {
-        override fun build(param: Context): HackerNewsStorageComponent {
-            return DaggerHackerNewsStorageComponent.builder()
+    object ComponentFactory : BaseComponentFactory<Context, CommonStorageComponent>() {
+        override fun build(param: Context): CommonStorageComponent {
+            return DaggerCommonStorageComponent.builder()
                 .context(param)
                 .build()
         }
     }
 }
 
-interface HackerNewsStorageDeps {
-    fun provideHackerNewsPreference(): HackerNewsPreference
+interface CommonStorageDeps {
+    fun provideHackerNewsPreference(): TopStoriesPreference
 }
 
 @Module
-object HackerNewsStorageModule {
+object CommonStorageModule {
 
     @Singleton
     @JvmStatic
     @Provides
     fun provideHackerNewsPreference(
         context: Context
-    ): HackerNewsPreference = HackerNewsPreferenceImpl.getInstance(context)
+    ): TopStoriesPreference = TopStoriesPreferenceImpl.getInstance(context)
 }

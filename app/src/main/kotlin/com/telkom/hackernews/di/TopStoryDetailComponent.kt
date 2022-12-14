@@ -2,9 +2,10 @@ package com.telkom.hackernews.di
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import com.telkom.hackernews.data.HackerNewsRepository
-import com.telkom.hackernews.data.HackerNewsRepositoryImpl
+import com.telkom.hackernews.data.TopStoriesRepository
+import com.telkom.hackernews.data.TopStoriesRepositoryImpl
 import com.telkom.hackernews.domain.BaseUseCase
+import com.telkom.hackernews.domain.MyFavoriteModel
 import com.telkom.hackernews.domain.SetFavoriteUseCase
 import com.telkom.hackernews.presentation.TopStoryDetailViewModel
 import com.telkom.hackernews.ui.TopStoryDetailActivity
@@ -20,7 +21,8 @@ import javax.inject.Singleton
         TopStoryDetailModule::class
     ],
     dependencies = [
-        HackerNewsStorageDeps::class
+        CommonNetworkDeps::class,
+        CommonStorageDeps::class
     ]
 )
 interface TopStoryDetailComponent {
@@ -28,13 +30,15 @@ interface TopStoryDetailComponent {
 
     @Component.Builder
     interface Builder : BaseComponentBuilder<TopStoryDetailComponent> {
-        fun storage(deps: HackerNewsStorageDeps): Builder
+        fun storage(deps: CommonStorageDeps): Builder
+        fun network(deps: CommonNetworkDeps): Builder
     }
 
     object ComponentProvider : BaseComponentProvider<Activity, TopStoryDetailComponent> {
         override fun provide(param: Activity): TopStoryDetailComponent {
             return DaggerTopStoryDetailComponent.builder()
-                .storage(HackerNewsStorageComponent.ComponentFactory.get(param))
+                .storage(CommonStorageComponent.ComponentFactory.get(param))
+                .network(CommonNetworkComponent.ComponentFactory.get(param))
                 .context(param)
                 .build()
         }
@@ -45,10 +49,10 @@ interface TopStoryDetailComponent {
 abstract class TopStoryDetailModule {
 
     @Binds
-    abstract fun bindRepository(impl: HackerNewsRepositoryImpl): HackerNewsRepository
+    abstract fun bindRepository(impl: TopStoriesRepositoryImpl): TopStoriesRepository
 
     @Binds
-    abstract fun bindUseCase(impl: SetFavoriteUseCase): BaseUseCase<String, Unit>
+    abstract fun bindUseCase(impl: SetFavoriteUseCase): BaseUseCase<MyFavoriteModel, Unit>
 
     @Binds
     @IntoMap

@@ -21,11 +21,8 @@ class TopStoryDetailAdapter : RecyclerView.Adapter<ViewHolder>() {
         return items.size
     }
 
-    fun clearAllAndAdd(items: List<String>) {
-        this.items.apply {
-            clear()
-            addAll(items)
-        }
+    fun addItem(item: String) {
+        this.items.add(item)
         notifyDataSetChanged()
     }
 
